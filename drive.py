@@ -12,7 +12,7 @@ from PIL import Image
 from flask import Flask
 from io import BytesIO
 
-from keras.models import load_model
+from keras.models import load_model, Model
 import h5py
 from keras import __version__ as keras_version
 
@@ -22,7 +22,11 @@ model = None
 prev_image_array = None
 
 from keras.applications.resnet50 import ResNet50, preprocess_input
+from keras.layers.pooling import GlobalMaxPooling2D
 modelTransfer = ResNet50(weights='imagenet', include_top=False)
+x = modelTransfer.output
+x = GlobalMaxPooling2D()(x)
+net = Model(inputs=modelTransfer.input, outputs=x)
 
 class SimplePIController:
     def __init__(self, Kp, Ki):
@@ -67,7 +71,7 @@ def telemetry(sid, data):
         # preprocessing
         x = np.expand_dims(image_array, axis=0)
         x = preprocess_input(x)
-        x = modelTransfer.predict(x, batch_size=1)
+        x = net.predict(x, batch_size=1)
         steering_angle = float(model.predict(x, batch_size=1))
         
         #steering_angle = float(model.predict(image_array[None, :, :, :], batch_size=1))
