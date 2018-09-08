@@ -21,6 +21,8 @@ app = Flask(__name__)
 model = None
 prev_image_array = None
 
+from keras.applications.resnet50 import ResNet50, preprocess_input
+modelTransfer = ResNet50(weights='imagenet', include_top=False)
 
 class SimplePIController:
     def __init__(self, Kp, Ki):
@@ -61,7 +63,14 @@ def telemetry(sid, data):
         imgString = data["image"]
         image = Image.open(BytesIO(base64.b64decode(imgString)))
         image_array = np.asarray(image)
-        steering_angle = float(model.predict(image_array[None, :, :, :], batch_size=1))
+        
+        # preprocessing
+        x = np.expand_dims(image_array, axis=0)
+        x = preprocess_input(x)
+        x = modelTransfer.predict(x, batch_size=1)
+        steering_angle = float(model.predict(x, batch_size=1))
+        
+        #steering_angle = float(model.predict(image_array[None, :, :, :], batch_size=1))
 
         throttle = controller.update(float(speed))
 
