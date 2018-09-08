@@ -1,4 +1,6 @@
 data
-models/bottleneck_feature.pickle
-models/weights.best.hdf5
+old_data
 models/model.h5
+models/weights.best.hdf5
+models/bottleneck_feature.pickle
+
