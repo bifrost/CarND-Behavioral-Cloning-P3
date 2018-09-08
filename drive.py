@@ -21,6 +21,8 @@ app = Flask(__name__)
 model = None
 prev_image_array = None
 
+import tensorflow as tf
+
 class SimplePIController:
     def __init__(self, Kp, Ki):
         self.Kp = Kp
@@ -119,7 +121,7 @@ if __name__ == '__main__':
         print('You are using Keras version ', keras_version,
               ', but the model was built using ', model_version)
 
-    model = load_model(args.model)
+    model = load_model(args.model, custom_objects={'tf': tf})
 
     if args.image_folder != '':
         print("Creating image folder at {}".format(args.image_folder))
