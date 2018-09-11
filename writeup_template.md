@@ -36,7 +36,7 @@ The goals / steps of this project are the following:
 My project includes the following files:
 * model.py containing the script to create and train the model
 * drive.py for driving the car in autonomous mode
-* model_track_1.h5 containing a trained convolution neural network for track 1
+* model.h5 containing a trained convolution neural network for track 1
 * model_track_2.h5 containing a trained convolution neural network for track 2
 * writeup_report.md or writeup_report.pdf summarizing the results
 
@@ -46,7 +46,7 @@ The project has been developed on Windows 10 with tensorflow v1.3.0, keras v2.2.
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing.
 
 ```sh
-python drive.py model_track_1.h5
+python drive.py model.h5
 ```
 
 or for track 2
