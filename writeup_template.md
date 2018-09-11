@@ -149,7 +149,7 @@ To capture good driving behavior, I first recorded two laps on track one using c
 
 ![alt text][image1]
 
-Then I used the left and right images with a correction koeficient 0.17, it helped to steer the car to center of the lane. 
+Then I used the left and right camera images with a correction koeficient 0.17, it helped to steer the car to center of the lane. 
 
 ![alt text][image2]
 ![alt text][image3]
@@ -159,6 +159,7 @@ I flipped the images and recorded extra data bur driving the opposite direction.
 For track 2 I recorded 1 lap and augmented images by adding gaussian noise to the images. 
 
 ![alt text][image5]
+**Real image and different levels of gaussian noise**
 
 All augmentation was implemented into the data generator (model.py lines 87-152).
 
