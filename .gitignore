@@ -1,7 +1,3 @@
 data
-old_data
-models/model.h5
-models/weights.best.hdf5
-models/bottleneck_feature.pickle
-models/model_2.h5
-models/weights_2.best.hdf5
+models/
+.ipynb_checkpoints
