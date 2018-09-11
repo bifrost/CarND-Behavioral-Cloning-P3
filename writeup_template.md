@@ -63,7 +63,7 @@ The model.py file contains the code for training and saving the convolution neur
 
 #### 1. An appropriate model architecture has been employed
 
-My model is a convolution neural network that consists of 4 convolution layer of size 10, 20, 40 and 80 (model.py line 33-40) and two dense layers of size 1024 (model.py line 45-48). MaxPooling was used to reduce the the images size and at the end of the convolution layer global MaxPooling was used (model.py line 43). To prevent overfitting dropout was added before the dense layers.
+My model is a convolution neural network that consists of 4 convolution layer of size 10, 20, 40 and 80 (model.py line 33-40) and 3 dense layers of size 1024 (model.py line 45-48) and a dense layer of size 1. MaxPooling was used to reduce the the images size and at the end of the convolution layer global MaxPooling was used (model.py line 43). To prevent overfitting dropout was added before the dense layers.
 All convolution layers are using RELU as activation function.
 
 #### 2. Attempts to reduce overfitting in the model
@@ -78,7 +78,7 @@ The model used an adam optimizer. The best result was achieved by using the defa
 
 #### 4. Appropriate training data
 
-Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road. For the first track all images was augmented by flip in the generator (model.py line 125). For the second track flip did not make sense because the car should drive in the right lane. Therefore all track 2 images was augmented by adding gaussian  noise to imitate shaded areas.
+Training data was chosen to keep the vehicle driving on the road. I used a combination of center lane driving, recovering from the left and right sides of the road. For track 1 all images was augmented by flip in the data generator (model.py line 125). For track 2 flip did not make sense because the car should drive in the right lane. Therefore all track 2 images was augmented by adding gaussian  noise to imitate shaded areas.
 
 For details about how I created the training data, see the next section. 
 
@@ -88,16 +88,18 @@ For details about how I created the training data, see the next section.
 
 At the beginning I followed the strategy from the project lecture. The result had to be improved and I tried to use transfer learning by using Keras build in networks. I failed hard because the prediction time was to slow to correct the car in real time.
 
-Next I tried to build a deeper convolutional network from scratch with a cropping and normalization layer, it worked much better. I also used images from left and right camera and adjusted the correction coefficient. Then I added a Lambda layer to convert RGB image to HSV and stacked it with a gray image, the result was improved. 
+Next I tried to build a deeper convolutional network from scratch with a cropping and normalization layer, it worked much better. I also used images from left and right camera and adjusted the correction coefficient. Then I added a Lambda layer to convert RGB image to HSV and stacked it with a gray image. 
+
+The result did improve and the vehicle was able to drive autonomously around the track 1 without leaving the road.
 
 ![alt text][image4]
-RGB image and the HSV channels
+#RGB image and the HSV channels#
 
 But still I had some problems with spots where the vehicle fell off the track. To fix it I recorded some extra data in the difficult regions and overfitted the model a bit, but it worked.
 
-The model had lot of problems with the second track, so I added an extra convolution layer and add more nodes to the dense layer. At the same time I also augmented the images by adding gaussian noise. The mean squared error were much higher than for track 1 and might be caused by the capacity of the model is too small or because by bad driving and collection of inconsistent data.
+The current model had lot of problems with the track 2, so I added an extra convolution layer and add more nodes to the dense layer. At the same time I also augmented the images by adding gaussian noise. The mean squared error of track 2 was much higher than for track 1. It might be becaused the capacity of the model is too small or because of bad driving and collection of inconsistent data.
 
-At the end of the process, the vehicle was able to drive autonomously around the track 1 without leaving the road. Improvements is still needed for track 2. 
+Improvements is still needed for track 2. 
 
 
 #### 2. Final Model Architecture
@@ -116,7 +118,7 @@ All convolution layers are using RELU as activation function, except the dense l
 PS: I realized that dense layer does not have any activations, so no non-linearity in the dense layers and all could be substituted with the last dense layer. But the layers have dropout and I don't know how to replace it correct. If I add the RELU as activation for the 2 first dense layers track 1 will fail. 
 
 |Layer (type)                 | Output Shape              | Param # |  
-|-------------------------------------------------------------------|
+|:---------------------------:|:-------------------------:|--------:|
 |cropping2d_7 (Cropping2D)    | (None, 90, 320, 3)        | 0       |
 |lambda_13 (Lambda)           | (None, 90, 320, 4)        | 0       |       
 |lambda_14 (Lambda)           | (None, 90, 320, 4)        | 0       |         
