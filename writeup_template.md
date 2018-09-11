@@ -93,7 +93,7 @@ Next I tried to build a deeper convolutional network from scratch with a croppin
 The result did improve and the vehicle was able to drive autonomously around the track 1 without leaving the road.
 
 ![alt text][image4]
-*RGB image and the HSV channels*
+**RGB image and the HSV channels**
 
 But still I had some problems with spots where the vehicle fell off the track. To fix it I recorded some extra data in the difficult regions and overfitted the model a bit, but it worked.
 
