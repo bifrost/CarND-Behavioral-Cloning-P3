@@ -116,7 +116,7 @@ The final model architecture (model.py lines 27-51) consisted of a convolution n
 
 All convolution layers are using RELU as activation function, except the dense layers.
 
-PS: I realized that dense layer does not have any activations, so no non-linearity in the dense layers and all could be substituted with the last dense layer. But the layers have dropout and I don't know how to replace it correct. If I add the RELU as activation for the 2 first dense layers track 1 will fail. 
+*PS: I realized that dense layer does not have any activations, so no non-linearity in the dense layers and all could be substituted with the last dense layer. But the layers have dropout and I don't know how to replace it correct. If I add the RELU as activation for the 2 first dense layers track 1 will fail.*
 
 |Layer (type)                 | Output Shape              | Param # |  
 |:---------------------------:|:-------------------------:|--------:|
