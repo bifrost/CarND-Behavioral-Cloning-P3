@@ -39,6 +39,8 @@ My project includes the following files:
 * model.h5 containing a trained convolution neural network for track 1
 * model_track_2.h5 containing a trained convolution neural network for track 2
 * writeup_report.md or writeup_report.pdf summarizing the results
+* video.mp4 video of track 1 driving in autonomous mode
+* video_track_2.mp4 video of track 2 driving in autonomous mode
 
 The project has been developed on Windows 10 with tensorflow v1.3.0, keras v2.2.2 and cuda v9.0.176.
 
@@ -95,7 +97,6 @@ Next I tried to build a deeper convolutional network from scratch with a croppin
 
 But still I had some problems with spots where the vehicle fell off the track. To fix it I recorded some extra data in the difficult regions and overfitted the model a bit, but it worked.
 
-The vehicle was able to drive autonomously around the track 1 without leaving the road.
 
 The current model had lot of problems with the track 2, so I added an extra convolution layer and add more nodes to the dense layer. At the same time I also augmented the images by adding gaussian noise. The mean squared error of track 2 was much higher than for track 1. It might be becaused the capacity of the model is too small or because of bad driving and collection of inconsistent data.
 
@@ -148,18 +149,18 @@ To capture good driving behavior, I first recorded two laps on track one using c
 
 ![alt text][image1]
 
-Then I used the left and right images with a correction koeficient on 0.17, it helped to steer the car to center of the lane. 
+Then I used the left and right images with a correction koeficient 0.17, it helped to steer the car to center of the lane. 
 
 ![alt text][image2]
 ![alt text][image3]
 
 I flipped the images and recorded extra data bur driving the opposite direction. In the difficult areas I recorded some extra data.
 
-For track 2 I recorded 1 lap and augmented images by adding gaussian noise to 
+For track 2 I recorded 1 lap and augmented images by adding gaussian noise to the images. 
 
 ![alt text][image5]
 
-All augmentation was implemented into the generator.
+All augmentation was implemented into the data generator (model.py lines 87-152).
 
 By monitoring the loss for track 1 I selected epocs 20 to prevent overfitting. I used an adam optimizer so that manually training the learning rate wasn't necessary. For track 2 I has to increase the epocs to 100.
 
