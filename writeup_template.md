@@ -88,14 +88,14 @@ For details about how I created the training data, see the next section.
 
 At the beginning I followed the strategy from the project lecture. The result had to be improved and I tried to use transfer learning by using Keras build in networks. I failed hard because the prediction time was to slow to correct the car in real time.
 
-Next I tried to build a deeper convolutional network from scratch with a cropping and normalization layer, it worked much better. I also used images from left and right camera and adjusted the correction coefficient. Then I added a Lambda layer to convert RGB image to HSV and stacked it with a gray image. 
-
-The result did improve and the vehicle was able to drive autonomously around the track 1 without leaving the road.
+Next I tried to build a deeper convolutional network from scratch with a cropping and normalization layer, it worked much better. I also used images from left and right camera and adjusted the correction coefficient. Then I added a Lambda layer to convert RGB image to HSV and stacked it with a gray image, the result did improv. 
 
 ![alt text][image4]
 **RGB image and the HSV channels**
 
 But still I had some problems with spots where the vehicle fell off the track. To fix it I recorded some extra data in the difficult regions and overfitted the model a bit, but it worked.
+
+The vehicle was able to drive autonomously around the track 1 without leaving the road.
 
 The current model had lot of problems with the track 2, so I added an extra convolution layer and add more nodes to the dense layer. At the same time I also augmented the images by adding gaussian noise. The mean squared error of track 2 was much higher than for track 1. It might be becaused the capacity of the model is too small or because of bad driving and collection of inconsistent data.
 
@@ -136,10 +136,11 @@ PS: I realized that dense layer does not have any activations, so no non-lineari
 |dense_20 (Dense)             | (None, 1024)              | 1049600 |   
 |dense_21 (Dense)             | (None, 1)                 | 1025    | 
 
+```
 Total params: 1,188,519
 Trainable params: 1,188,519
 Non-trainable params: 0
-
+```
 
 #### 3. Creation of the Training Set & Training Process
 
