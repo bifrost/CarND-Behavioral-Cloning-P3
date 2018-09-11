@@ -163,7 +163,7 @@ For track 2 I recorded 1 lap and augmented images by adding gaussian noise to th
 
 All augmentation was implemented into the data generator (model.py lines 87-152).
 
-By monitoring the loss for track 1 I selected epocs 20 to prevent overfitting. I used an adam optimizer so that manually training the learning rate wasn't necessary. For track 2 I has to increase the epocs to 100.
+By monitoring the loss for track 1 I selected epocs 20 to prevent overfitting. I used an adam optimizer so that manually training the learning rate wasn't necessary. For track 2 I had to increase the epocs to 100.
 
 
 
